@@ -31,6 +31,7 @@ public class EmployeePayrollController {
         ResponseDTO responseDTO = new ResponseDTO("Get call for ID success", employeePayrollData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
+
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO){
         EmployeePayrollData employeePayrollData = null;
