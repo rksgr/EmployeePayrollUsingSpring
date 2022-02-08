@@ -1,27 +1,13 @@
 package com.example.springemployeepayroll.DTO;
+import lombok.Data;
 
-public class ResponseDTO {
+// UC1 : Use Lombok to auto generate getters and setters for DTO
+public @Data class ResponseDTO {
     private String message;
     private Object data;
 
     public ResponseDTO(String message, Object data) {
         this.message = message;
-        this.data = data;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
         this.data = data;
     }
 }
