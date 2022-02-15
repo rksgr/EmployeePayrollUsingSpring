@@ -56,6 +56,21 @@ public class EmployeePayrollController {
         return new ResponseEntity<ResponseDTO>(responsDTO, HttpStatus.OK);
     }
 
+    /**
+     * Method Function: TO Get Employee Payroll Details based on department
+     *      Performs RETRIEVE operation
+     *
+     * @param department
+     * @return  JSON Response containing particular employee details
+     */
+    @GetMapping("/department/{department}")
+    public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("department") String department){
+        List<EmployeePayrollData> employeePayrollDataList = null;
+        employeePayrollDataList = iEmployeePayrollService.getEmployeesByDepartment(department) ;
+        ResponseDTO responsDTO = new ResponseDTO("Get call for department success", employeePayrollDataList);
+        return new ResponseEntity<ResponseDTO>(responsDTO, HttpStatus.OK);
+    }
+
     /** UC 1: Add validation to name field so that REST call can be validated */
     /**
      * Method function: To add a new Employee to the Employee Payroll List (CREATE operation)
