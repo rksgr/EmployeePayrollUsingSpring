@@ -23,7 +23,7 @@ public @Data class EmployeePayrollData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="employee_id")
-    private long employeeId;
+    private int employeeId;
 
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}$", message = "Employee name invalid")
     @Column(name="name")
