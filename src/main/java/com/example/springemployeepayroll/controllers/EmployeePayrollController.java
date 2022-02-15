@@ -67,7 +67,7 @@ public class EmployeePayrollController {
     public ResponseEntity<ResponseDTO> createEmployeePayrollData(@RequestBody @Valid EmployeePayrollDTO employeePayrollDTO){
         log.debug("Employee DTO: "+ employeePayrollDTO.toString());
         EmployeePayrollData employeePayrollData = null;
-        employeePayrollData = iEmployeePayrollService.createEmployeePayrollData(employeeId.incrementAndGet(), employeePayrollDTO);
+        employeePayrollData = iEmployeePayrollService.createEmployeePayrollData(employeePayrollDTO);
         ResponseDTO responseDTO = new ResponseDTO("Creation of Employee payroll data successful", employeePayrollData);
         return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
