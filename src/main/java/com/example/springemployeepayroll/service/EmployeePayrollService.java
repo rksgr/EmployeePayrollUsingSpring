@@ -12,7 +12,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     // Store the list in the RAM
     private List<EmployeePayrollData> employeePayrollList = new ArrayList<>();
 
-
     @Override
     public List<EmployeePayrollData> getEmployeePayrollData(){
         return employeePayrollList;
@@ -22,10 +21,11 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     public EmployeePayrollData getEmployeePayrollDataById(int empId){
         return employeePayrollList.get(empId-1);
     }
+
     @Override
-    public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO){
+    public EmployeePayrollData createEmployeePayrollData(long empId, EmployeePayrollDTO employeePayrollDTO){
         EmployeePayrollData employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollData(1, employeePayrollDTO);
+        employeePayrollData = new EmployeePayrollData(empId , employeePayrollDTO);
         employeePayrollList.add(employeePayrollData);
         return employeePayrollData;
     }
