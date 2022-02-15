@@ -64,7 +64,7 @@ public class EmployeePayrollController {
      * @return JSON Response containing employee details including his employee ID
      */
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO){
+    public ResponseEntity<ResponseDTO> createEmployeePayrollData(@RequestBody @Valid EmployeePayrollDTO employeePayrollDTO){
         log.debug("Employee DTO: "+ employeePayrollDTO.toString());
         EmployeePayrollData employeePayrollData = null;
         employeePayrollData = iEmployeePayrollService.createEmployeePayrollData(employeeId.incrementAndGet(), employeePayrollDTO);
