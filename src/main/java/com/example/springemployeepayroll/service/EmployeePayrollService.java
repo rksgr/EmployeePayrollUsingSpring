@@ -2,13 +2,22 @@ package com.example.springemployeepayroll.service;
 
 import com.example.springemployeepayroll.DTO.EmployeePayrollDTO;
 import com.example.springemployeepayroll.Entity.EmployeePayrollData;
+import com.example.springemployeepayroll.repository.EmployeePayrollRepository;
+import com.example.springemployeepayroll.exception.EmployeePayrollException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class EmployeePayrollService implements IEmployeePayrollService{
+
+    @Autowired
+    private EmployeePayrollRepository employeePayrollRepository;
+
     // Store the list in the RAM
     private List<EmployeePayrollData> employeePayrollList = new ArrayList<>();
 
@@ -19,15 +28,19 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int empId){
-        return employeePayrollList.get(empId-1);
+        return employeePayrollList.stream()
+                .filter(empData->empData.getEmployeeId() == empId)
+                .findFirst()
+                .orElseThrow(()-> new EmployeePayrollException("Employee not found"));
     }
 
     @Override
-    public EmployeePayrollData createEmployeePayrollData(long empId, EmployeePayrollDTO employeePayrollDTO){
+    public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO){
         EmployeePayrollData employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollData(empId , employeePayrollDTO);
+        employeePayrollData = new EmployeePayrollData(employeePayrollDTO);
+        log.debug("Emp data "+ employeePayrollData.toString());
         employeePayrollList.add(employeePayrollData);
-        return employeePayrollData;
+        return employeePayrollRepository.save(employeePayrollData);
     }
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO){
